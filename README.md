@@ -7,8 +7,11 @@
 - there are preconfigured boxes already available
 - this creates a vagrantfile with some content
 - to start the machine with basic settings, just run ```vagrant up```
-- sometimes the boot time takes too long and a timeout occues but you can start Virtualbox and check whether that vm is running or not
-- once running, run ```vagrant ssh``` to connect to it via ssh (this step took long time to work until I finally ran ```vagrant ssh default --debug``` where default is the name of the machine I found by ```vagrant status```)
+- sometimes the boot time takes too long and a timeout occurs but you can start Virtualbox and check whether that vm is running or not
+- once running, run ```vagrant ssh``` to connect to it via ssh (sometimes this doesn't work)
+  - in this case, halt the machine with ```vagrant halt``` and then open virtualbox
+  - open settings for the machine and go to network
+  - select advanced options and set adapter type to "T server" and repeat the above steps
 - at this point your machine is up and you are connected to it at /home/vagrant directory
 - you can run ```logout``` on the machine terminal to jump out of connection
 
