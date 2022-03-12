@@ -12,6 +12,7 @@
   - in this case, halt the machine with ```vagrant halt``` and then open virtualbox
   - open settings for the machine and go to network
   - select advanced options and set adapter type to "T server" and repeat the above steps
+  - every time before running vagrant up, open virtualbox and double-check netwrok settings and click OK (as without this it again starts timing out next time on for some reason)
 - at this point your machine is up and you are connected to it at /home/vagrant directory
 - you can run ```logout``` on the machine terminal to jump out of connection
 
