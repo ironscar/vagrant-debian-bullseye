@@ -6,15 +6,22 @@
 - second step is downloading the linux box for vagrant ``` vagrant init debian/bullseye64 ```
 - there are preconfigured boxes already available
 - this creates a vagrantfile with some content
+  - uncomment the public network line so that vm acts as another device on same network as host
 - to start the machine with basic settings, just run ```vagrant up```
 - sometimes the boot time takes too long and a timeout occurs but you can start Virtualbox and check whether that vm is running or not
 - once running, run ```vagrant ssh``` to connect to it via ssh (sometimes this doesn't work)
   - in this case, halt the machine with ```vagrant halt``` and then open virtualbox
   - open settings for the machine and go to network
   - select advanced options and set adapter type to "T server" and repeat the above steps
-  - every time before running vagrant up, open virtualbox and double-check netwrok settings and click OK (as without this it again starts timing out next time on for some reason)
+  - every time before running vagrant up, open virtualbox and double-check network settings and click OK (as without this it again starts timing out next time on for some reason)
 - at this point your machine is up and you are connected to it at /home/vagrant directory
 - you can run ```logout``` on the machine terminal to jump out of connection
+
+## Pinging host and vm
+
+- run ```ipconfig``` on windows host and look at the ipv4 address in the virtualbox host-only network or the wireless LAN adapter to find the ip which can be pinged from the vm
+- run ```ip a``` on the debian vm (may have different command on other linux variants to check ip) and look at the first ip after inet of last entry to get the vm ip
+- running ping command from host with ip of vm will successfully ping and vice versa
 
 ## Install required software
 
