@@ -68,3 +68,16 @@
 - We need these servers to exist so we create a vagrantfile in an ```inventory``` folder that creates 2 app servers
 - We set the network type to public network so that they work as new devices on the network but we don't assign them an IP as doing to doesn't make them accessible from host
 - Instead we can run ```ip a``` on the vm to find its ip
+
+## Ansible config & inventory
+- The config file by default exists in /etc/ansible as ansible.cfg
+- If it doesn't exist, we can create it as covered in the installation section of the readme
+- The inventory file by default, gets picked up from /etc/ansible/hosts where hosts is the file name
+- We can specify an inventory file called hosts as shown here
+- Running ```ansible app -m ping -u vagrant``` should be able to ping the hosts
+  - app is the group specified in the hosts inventory file
+  - -m implies use the ping module
+  - -u implies use the vagrant user
+  - currently this doesnt work due to some ssh issue
+
+---
