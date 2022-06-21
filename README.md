@@ -9,17 +9,16 @@
   - uncomment the public network line so that vm acts as another device on same network as host
 - to start the machine with basic settings, just run ```vagrant up```
 - sometimes the boot time takes too long and a timeout occurs but you can start Virtualbox and check whether that vm is running or not
-- once running, run ```vagrant ssh``` to connect to it via ssh (sometimes this doesn't work)
-  - in this case, halt the machine with ```vagrant halt``` and then open virtualbox
-  - open settings for the machine and go to network
-  - select advanced options and set adapter type to "T server" and repeat the above steps
-  - every time before running vagrant up, open virtualbox and double-check network settings and click OK (as without this it again starts timing out next time on for some reason)
+- once running, run ```vagrant ssh``` to connect to it via ssh (sometimes this hangs)
+  - in this case, halt the machine with ```vagrant halt```
+  - Open control panel > Programs > turn windows features on or off
+  - Disable VirtualMachinePlatorm and restart the system
 - at this point your machine is up and you are connected to it at /home/vagrant directory
 - you can run ```logout``` on the machine terminal to jump out of connection
 
 ## Pinging host and vm
 
-- run ```ipconfig``` on windows host and look at the ipv4 address in the virtualbox host-only network or the wireless LAN adapter to find the ip which can be pinged from the vm
+- run ```ipconfig``` on windows host and look at the ipv4 address in the virtualbox host-only network to find the ip which can be pinged from the vm
 - run ```ip a``` on the debian vm (may have different command on other linux variants to check ip) and look at the first ip after inet of last entry to get the vm ip
 - running ping command from host with ip of vm will successfully ping and vice versa
 
@@ -31,6 +30,7 @@
 - ```sudo apt-get install zlib1g zlib1g-dev``` to install zlib for decompressing data
 - ```sudo apt install libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev``` to install additional packages required by python & pip
 - ```sudo apt-get install libffi-dev``` for _ctypes module that is required for ansible
+- ```sudo apt install vim``` for vim so as to be able to edit files easily (vi doesn't allow backspace by default)
 
 ## Install Python for Ansible
 
@@ -60,3 +60,11 @@
   - ```pip3 list``` to confirm setuptools is installed and otherwise run ```pip3 install --user setuptools```
 - ```ansible --version``` to check ansible-core version and if its installed successfully
 - ```pip3 list``` to check version of ansible and ansible-core
+- ```sudo mkdir ansible``` in /etc and create ansible.cfg file with content from https://github.com/ansible/ansible/blob/stable-2.9/examples/ansible.cfg
+
+## Create vms as infrastructure
+
+- Ansible manages infrastructure as servers in an inventory file
+- We need these servers to exist so we create a vagrantfile in an ```inventory``` folder that creates 2 app servers
+- We set the network type to public network so that they work as new devices on the network but we don't assign them an IP as doing to doesn't make them accessible from host
+- Instead we can run ```ip a``` on the vm to find its ip

@@ -1,0 +1,29 @@
+Vagrant.configure("2") do |config|
+
+    config.ssh.insert_key = false
+    config.vm.provider :virtualbox do |vb|
+        vb.customize ["modifyvm", :id, "--memory", "256"] 
+    end
+
+    # application server 1
+    config.vm.define "app1" do |app|
+        app.vm.hostname = "app1.dev"
+        app.vm.box = "debian/bullseye64"
+        app.vm.network "public_network"
+    end
+
+    # application server 2
+    config.vm.define "app2" do |app|
+        app.vm.hostname = "app2.dev"
+        app.vm.box = "debian/bullseye64"
+        app.vm.network "public_network"
+    end
+
+    # database server
+    # config.vm.define "db" do |db|
+    #     db.vm.hostname = "db.dev"
+    #     db.vm.box = "debian/bullseye64"
+    #     db.vm.network "public_network"
+    # end
+
+end
