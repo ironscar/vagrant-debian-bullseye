@@ -24,7 +24,7 @@
 
 ## Install required software
 
-- ```sudo apt get update && sudo apt-get upgrade``` to get latest Debian packages
+- ```sudo apt-get update && sudo apt-get upgrade``` to get latest Debian packages
 - ```sudo apt-get autoremove``` to clean up and remove unrequired packages
 - ```sudo apt-get install build-essential``` to install gcc, make etc required to compile python
 - ```sudo apt-get install zlib1g zlib1g-dev``` to install zlib for decompressing data
@@ -79,5 +79,15 @@
   - -m implies use the ping module
   - -u implies use the vagrant user
   - currently this doesnt work due to some ssh issue
+
+
+## Generating ssh keys
+- Navigate to ```cd ~/.ssh``` of each of ansible host
+- Use ```sudo ssh-keygen -t rsa``` to generate new ssh key
+- It asks path of file to save in so name it as ```ansible_id_rsa```
+- Give it a pass phrase for security like ```ansible```
+- It will then save that private key in ~/.ssh/ansible_id_rsa and public key at ~/.ssh/ansible_id_rsa.pub
+- Then copy the public key and manually paste them in ~/.ssh/authorized_keys file of app1 and app2
+- After that, doing ```sudo ssh -i ansible_id_rsa vagrant@<ip of server>``` from ```~/.ssh``` will allow connecting to those machines via ssh after verifying ssh passphrase (ends up using vagrant user but want to use my own custom user somehow)
 
 ---
