@@ -87,8 +87,10 @@
 - It asks path of file to save in so name it as ```ansible_id_rsa```
 - Give it a pass phrase for security like ```ansible```
 - It will then save that private key in ```~/.ssh/ansible_id_rsa``` and public key at ```~/.ssh/ansible_id_rsa.pub```
-- Then copy the public key and manually paste them in ```~/.ssh/authorized_keys``` file of app1 and app2
-- After that, doing ```sudo ssh -i ansible_id_rsa vagrant@<ip of server>``` from ```~/.ssh``` will allow connecting to those machines via ssh after verifying ssh passphrase (ends up using vagrant user but want to use my own custom user somehow)
+- Now, we need to decide what user of app1 and app2 should be accessible via SSH, and we will choose both ```vagrant``` and ```root```
+- Copy the public key and manually paste them in ```~/.ssh/authorized_keys``` file of app1 and app2 while being ```vagrant``` user and ```root``` user separately
+- You can change between users with ```sudo su - <username>``` and while in root, may have to create the .ssh directory and authorized_keys file in it
+- After that, doing ```sudo ssh -i ansible_id_rsa <username>@<ip of server>``` from ```~/.ssh``` will allow connecting to those machines via ssh after verifying ssh passphrase
 
 ## Troubleshooting SSH
 - Generate keys in ```~/.ssh/```
@@ -98,5 +100,6 @@
   - PermitRootLogin yes
   - PasswordAuthentication no
 - After updating these, make sure to restart ssh service with ```sudo systemctl restart ssh.service```
+- Every user has its own home directory with ```~/.ssh.authorized_keys``` so SSH is also specific to that user
 
 ---
