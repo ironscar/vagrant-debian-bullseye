@@ -61,7 +61,7 @@
   - ```pip3 list``` to confirm setuptools is installed and otherwise run ```pip3 install --user setuptools```
 - ```ansible --version``` to check ansible-core version and if its installed successfully
 - ```pip3 list``` to check version of ansible and ansible-core
-- ```sudo mkdir ansible``` in /etc and create ansible.cfg file with content from https://github.com/ansible/ansible/blob/stable-2.9/examples/ansible.cfg
+- ```sudo mkdir ansible``` in /etc and create ansible.cfg file by ```ansible-config init --disabled > ansible.cfg```
 
 ## Create vms as infrastructure
 
