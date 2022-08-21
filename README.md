@@ -96,11 +96,15 @@
 - The config file by default exists in /etc/ansible as ansible.cfg
 - If it doesn't exist, we can create it as covered in the installation section of the readme
 - The inventory file by default, gets picked up from /etc/ansible/hosts where hosts is the file name
-- We can specify an inventory file called hosts as shown here
+- We can specify an inventory file called hosts as shown here in project
 - Running ```ansible app -m ping -u vagrant``` should be able to ping the hosts
   - app is the group specified in the hosts inventory file
   - -m implies use the ping module
   - -u implies use the vagrant user
   - works for each machine separately but not all at once for some reason
+- We can create our own inventory.yml file to override etc/ansible/hosts
+- Do ```mkdir ansible-learning``` in home(~) directory and create inventory.yml file as shown here in project
+- Running ```ansible app -i ~/ansible-learning/inventory.yml -m ping``` will now do something similar to before
+  - again only works for each machine separately
 
 ---
