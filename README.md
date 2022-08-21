@@ -12,7 +12,8 @@
 - once running, run ```vagrant ssh``` to connect to it via ssh (sometimes this hangs)
   - in this case, halt the machine with ```vagrant halt```
   - Open control panel > Programs > turn windows features on or off
-  - Disable VirtualMachinePlatorm and restart the system
+  - Disable VirtualMachinePlatorm & Windoes Hyper-V and restart the system
+  - This can have an effect on running Docker Desktop
 - at this point your machine is up and you are connected to it at /home/vagrant directory
 - you can run ```logout``` on the machine terminal to jump out of connection
 
@@ -34,9 +35,9 @@
 
 ## Install Python for Ansible
 
-- ```wget https://www.python.org/downloads/release/python-3812/``` to download the python zipped package (find the appropriate version, this one is 3.8.12)
-- ```tar -xf Python-3.8.12-tgz``` to unzip it
-- ```sudo mv Python-3.8.12 /opt/Python-3.8.12``` to move the installation to opt directory and then go inside /opt/Python directory
+- ```wget https://www.python.org/ftp/python/3.8.12/Python-3.8.12.tgz``` to download the python zipped package (find the appropriate version, this one is 3.8.12)
+- ```tar -xf Python-3.8.12.tgz``` to unzip it
+- ```sudo mv Python-3.8.12 /opt/Python-3.8.12``` to move the installation to opt directory and then go inside ```/opt/Python-3.8.12``` directory
 - ```./configure --enable-optimizations --enable-shared``` to verify dependencies and configure the environment
 - the above step may specify errors and if successful, creates a makefile
 - ```make``` to compile makefile
@@ -49,7 +50,7 @@
 
 - ```wget https://bootstrap.pypa.io/get-pip.py``` to download pip
 - ```python3.8 get-pip.py``` to install pip (may warn about pip not being on path, in which case follow next sub-point)
-  - ```export PATH = $HOME/.local/bin:$PATH``` will add the pip install dir to PATH where $HOME will be /home/vagrant and $PATH is the rest of the paths configured
+  - ```export PATH=$HOME/.local/bin:$PATH``` will add the pip install dir to PATH where $HOME will be /home/vagrant and $PATH is the rest of the paths configured (there should be no spaces around the '=')
 - ```python3.8 -m pip install --upgrade pip``` to upgrade pip version
 - ```pip3.8 --version``` to check pip version and that its installed properly
 
@@ -69,24 +70,13 @@
 - We set the network type to public network so that they work as new devices on the network but we don't assign them an IP as doing to doesn't make them accessible from host
 - Instead we can run ```ip a``` on the vm to find its ip
 
-## Ansible config & inventory
-- The config file by default exists in /etc/ansible as ansible.cfg
-- If it doesn't exist, we can create it as covered in the installation section of the readme
-- The inventory file by default, gets picked up from /etc/ansible/hosts where hosts is the file name
-- We can specify an inventory file called hosts as shown here
-- Running ```ansible app -m ping -u vagrant``` should be able to ping the hosts
-  - app is the group specified in the hosts inventory file
-  - -m implies use the ping module
-  - -u implies use the vagrant user
-  - currently this doesnt work due to some ssh issue
-
-
 ## Generating ssh keys
 - Navigate to ```cd ~/.ssh``` of each of ansible host
 - Use ```sudo ssh-keygen -t rsa``` to generate new ssh key
 - It asks path of file to save in so name it as ```ansible_id_rsa```
 - Give it a pass phrase for security like ```ansible```
 - It will then save that private key in ```~/.ssh/ansible_id_rsa``` and public key at ```~/.ssh/ansible_id_rsa.pub```
+- Currently the owner is root but change the ownership of both to ```vagrant``` user by ```sudo chown vagrant:vagrant ansible_id_rsa``` and same for the public key
 - Now, we need to decide what user of app1 and app2 should be accessible via SSH, and we will choose both ```vagrant``` and ```root```
 - Copy the public key and manually paste them in ```~/.ssh/authorized_keys``` file of app1 and app2 while being ```vagrant``` user and ```root``` user separately
 - You can change between users with ```sudo su - <username>``` and while in root, may have to create the .ssh directory and authorized_keys file in it
@@ -101,5 +91,16 @@
   - PasswordAuthentication no
 - After updating these, make sure to restart ssh service with ```sudo systemctl restart ssh.service```
 - Every user has its own home directory with ```~/.ssh.authorized_keys``` so SSH is also specific to that user
+
+## Ansible config & inventory
+- The config file by default exists in /etc/ansible as ansible.cfg
+- If it doesn't exist, we can create it as covered in the installation section of the readme
+- The inventory file by default, gets picked up from /etc/ansible/hosts where hosts is the file name
+- We can specify an inventory file called hosts as shown here
+- Running ```ansible app -m ping -u vagrant``` should be able to ping the hosts
+  - app is the group specified in the hosts inventory file
+  - -m implies use the ping module
+  - -u implies use the vagrant user
+  - works for each machine separately but not all at once for some reason
 
 ---
