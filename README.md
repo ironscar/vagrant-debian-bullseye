@@ -109,6 +109,15 @@
 - Running `ansible app -i ~/ansible-learning/inventory.yml -m ping` will now do something similar to before
   - works exactly like when we run using hosts (including the one-time fail etc)
   - -i specifies the custom inventory file to use, defaults to /etc/ansible/hosts
+- For each of the target hosts, we can set a symbolic link as `sudo ln --symbolic /usr/bin/python3 /usr/bin/python` and this way Ansible trying to by default find python2 will be led to python3 and not fail even for the first time (though it will still hang until prompted)
+
+---
+
+## Ansible playbooks
+- Create a playbook as shown in project for first_playbook
+- Run `ansible-playbook -i inventory.yml playbook.yml` and watch as it completes the tasks
+  - it still hangs until prompt because of the python interpreter issue but works
+  - the yml file has hyphens which is required for it to work
 - 
 
 ---
