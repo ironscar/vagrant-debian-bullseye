@@ -1,5 +1,6 @@
 - name: My first play
   hosts: app
+  remote_user: vagrant
   tasks:
     - name: Ping my hosts
       ansible.builtin.ping:

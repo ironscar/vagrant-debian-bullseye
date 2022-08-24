@@ -1,0 +1,12 @@
+- name: My Docker Playbook
+  hosts: app
+  remote_user: root
+  tasks:
+    - name: Start spring-boot container
+      docker_container:
+        name: spring-boot-docker
+        image: ironscar/spring-boot-docker:5
+        state: started
+        detach: true
+        cleanup: true
+        ports: 8080:8081

@@ -118,6 +118,15 @@
 - Run `ansible-playbook -i inventory.yml playbook.yml` and watch as it completes the tasks
   - it still hangs until prompt because of the python interpreter issue but works
   - the yml file has hyphens which is required for it to work
-- 
+
+## Setting up docker containers on target machines
+- Follow steps at https://docs.docker.com/engine/install/debian/ to install docker on all machines
+- For now, we will run ansible directly on ansible control node to distribute the spring boot docker image on the target machines
+- install pip on target machines by `sudo apt-get install pip`
+- Follow the `python_docker_install_playbook.yml` to install python docker module in target machines
+- Follow the `docker_playbook.yml` to get the container on to the target machines
+  - pip installs packages on a per-user basis so make sure that the docker_install playbook and the docker playbook, both use the same remote user which is root (due to permission requirements).
+  - This pulls the image from dockerhub and attempts to run it
+  - (currently fails due to container randomly exiting - need to troubleshoot)
 
 ---

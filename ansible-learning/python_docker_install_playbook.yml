@@ -1,0 +1,8 @@
+- name: Python Docker install playbook
+  hosts: app
+  remote_user: root
+  tasks:
+    - name: Pip install docker
+      pip:
+        name: docker
+        state: latest
