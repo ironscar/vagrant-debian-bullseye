@@ -2,7 +2,7 @@ Vagrant.configure("2") do |config|
 
     config.ssh.insert_key = false
     config.vm.provider :virtualbox do |vb|
-        vb.customize ["modifyvm", :id, "--memory", "256"] 
+        vb.customize ["modifyvm", :id, "--memory", "512"] 
     end
 
     # application server 1
