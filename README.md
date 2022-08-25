@@ -127,7 +127,7 @@
 - Follow the `docker_playbook.yml` to get the container on to the target machines
   - pip installs packages on a per-user basis so make sure that the docker_install playbook and the docker playbook, both use the same remote user which is root (due to permission requirements).
   - This pulls the image from dockerhub and attempts to run it
-  - In case container randomly exits, check logs with `docker logs <container-id>` or check errors and exit codes via `docker inspect container-demo`
+  - In case container randomly exits, check logs with `docker logs <container-id>` or check errors and exit codes via `docker inspect <container-id>`
   - after increasing RAM memory, it works as expected with the containers started
 
 ---
