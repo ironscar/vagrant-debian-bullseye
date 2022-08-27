@@ -74,13 +74,13 @@
 - Navigate to `cd ~/.ssh` of each of ansible host
 - Use `sudo ssh-keygen -t rsa` to generate new ssh key
 - It asks path of file to save in so name it as `ansible_id_rsa`
-- Give it a pass phrase for security like `ansible`
+- Skip giving it a pass phrase
 - It will then save that private key in `~/.ssh/ansible_id_rsa` and public key at `~/.ssh/ansible_id_rsa.pub`
 - Currently the owner is root but change the ownership of both to `vagrant` user by `sudo chown vagrant:vagrant ansible_id_rsa` and same for the public key
 - Now, we need to decide what user of app1 and app2 should be accessible via SSH, and we will choose both `vagrant` and `root`
 - Copy the public key and manually paste them in `~/.ssh/authorized_keys` file of app1 and app2 while being `vagrant` user and `root` user separately
 - You can change between users with `sudo su - <username>` and while in root, may have to create the .ssh directory and authorized_keys file in it
-- After that, doing `sudo ssh -i ansible_id_rsa <username>@<ip of server>` from `~/.ssh` will allow connecting to those machines via ssh after verifying ssh passphrase
+- After that, doing `sudo ssh -i ansible_id_rsa <username>@<ip of server>` from `~/.ssh` will allow connecting to those machines via ssh after verifying ssh passphrase if set
 
 ## Troubleshooting SSH
 - Generate keys in `~/.ssh/`
@@ -110,6 +110,9 @@
   - works exactly like when we run using hosts (including the one-time fail etc)
   - -i specifies the custom inventory file to use, defaults to /etc/ansible/hosts
 - For each of the target hosts, we can set a symbolic link as `sudo ln --symbolic /usr/bin/python3 /usr/bin/python` and this way Ansible trying to by default find python2 will be led to python3 and not fail even for the first time (though it will still hang until prompted)
+  - one way to prevent this is by running the command with the `-b` flag means privilege escalation with no password prompt while using a passwordless SSH key
+  - using `-K` (capital K) will prompt for password to escalate priveleges but after that works for all hosts continuously without hanging
+  - the reason why it used to work the second or third time is because the connection is already open
 
 ---
 
@@ -118,6 +121,7 @@
 - Run `ansible-playbook -i inventory.yml playbook.yml` and watch as it completes the tasks
   - it still hangs until prompt because of the python interpreter issue but works
   - the yml file has hyphens which is required for it to work
+  - using `-b` flag makes it work all the time without hanging
 
 ## Setting up docker containers on target machines
 - Follow steps at https://docs.docker.com/engine/install/debian/ to install docker on all machines
