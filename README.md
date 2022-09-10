@@ -134,4 +134,13 @@
   - In case container randomly exits, check logs with `docker logs <container-id>` or check errors and exit codes via `docker inspect <container-id>`
   - after increasing RAM memory, it works as expected with the containers started
 
+## Testing container to VM communication
+- Log into jenkins container as root with `sudo docker exec --user="root" -it <container-name> /bin/bash`
+- Install vim if not there with `apt-get install vim`
+- Go to ~/.ssh and create the .ssh directory if not already there
+- Create a new file with vim and copy the private key from host VM into this file, call it `ansible_id_rsa` again
+- Update permissions for private key file to be read-writable only by you (else SSH will not use the key) by `chown 600 ansible_id_rsa`
+- Run `ssh -i ansible_id_rsa vagrant@192.168.0.105` to ssh into target VM
+- With this, we know that installing ansible into the container will still allow communication to the target VMs as long as the private key can be copied in
+
 ---
