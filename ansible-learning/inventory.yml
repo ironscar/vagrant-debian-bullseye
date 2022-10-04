@@ -1,6 +1,6 @@
 app:
   vars:
-    ansible_ssh_private_key_file: ~/.ssh/ansible_id_rsa
+    ansible_ssh_private_key_file: /~/.ssh/ansible_id_rsa
   hosts:
     vm01:
       ansible_host: 192.168.0.105
