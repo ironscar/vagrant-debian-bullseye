@@ -125,6 +125,11 @@
 
 ## Setting up docker containers on target machines
 - Follow steps at https://docs.docker.com/engine/install/debian/ to install docker on all machines
+- specifically for the jenkins node vms (that run the jenkins container), the current user must be in docker group
+  - make sure docker group exists and `/var/run/docker.sock` is configured to use that group
+  - use `sudo usermod -aG docker vagrant` assuming vagrant as current user to add it to docker group
+  - restart the VM for changes to take effect
+  - this allows the jenkins container to access docker.sock without permission issues
 - For now, we will run ansible directly on ansible control node to distribute the spring boot docker image on the target machines
 - install pip on target machines by `sudo apt-get install pip`
 - Follow the `python_docker_install_playbook.yml` to install python docker module in target machines
