@@ -5,7 +5,7 @@
     - name: Remove old images
       docker_image:
         name: ironscar/spring-boot-Docker
-        tag: {{spring_boot_docker.tag}}
+        tag: '{{spring_boot_docker.tag}}'
         state: present
     - name: Start new spring-boot container
       docker_container:
