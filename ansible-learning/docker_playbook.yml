@@ -5,7 +5,7 @@
     - name: Start spring-boot container
       docker_container:
         name: spring-boot-docker
-        image: ironscar/spring-boot-docker:5
+        image: ironscar/spring-boot-docker:{{spring_boot_docker.tag}}
         state: started
         detach: true
         cleanup: true
