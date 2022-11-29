@@ -139,6 +139,8 @@
   - In case container randomly exits, check logs with `docker logs <container-id>` or check errors and exit codes via `docker inspect <container-id>`
   - after increasing RAM memory, it works as expected with the containers started
 
+---
+
 ## Testing container to VM communication
 - Log into jenkins container as root with `sudo docker exec --user="root" -it <container-name> /bin/bash`
 - Install vim if not there with `apt-get install vim`
@@ -147,5 +149,15 @@
 - Update permissions for private key file to be read-writable only by you (else SSH will not use the key) by `chown 600 ansible_id_rsa`
 - Run `ssh -i ansible_id_rsa vagrant@192.168.0.105` to ssh into target VM
 - With this, we know that installing ansible into the container will still allow communication to the target VMs as long as the private key can be copied in
+
+---
+
+## Ansible variables
+- To use variables inside playbooks in a scalable way, we can create a `group_vars` directory in the inventory and playbook directory
+- we can create a yml file in group_vars named with one of the host namepaces, like in inventory yml, we have `app`
+- In app.yml, we specified a tag value for our spring_boot_docker image and used that in our playbook during deployment
+- using this, we can specify what version should be deployed on a particular environment
+- while this makes sense for prod env, it doesn't make a lot of sense for staging env where we might want to directly deploy the image that we just built
+- so we can basically have a jenkinsfile that will build an image with tag as `snapshot` and then have a separate ansible variable for the staging servers that always use the snapshot tag instead of a specific numeric tag
 
 ---
