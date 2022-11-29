@@ -2,6 +2,11 @@
   hosts: app
   remote_user: root
   tasks:
+    - name: Remove old images
+      community.docker.docker_image:
+        name: ironscar/spring-boot-docker
+        state: absent
+        force_absent: yes
     - name: Start spring-boot container
       docker_container:
         name: spring-boot-docker
