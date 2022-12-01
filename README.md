@@ -123,6 +123,8 @@
   - the yml file has hyphens which is required for it to work
   - using `-b` flag makes it work all the time without hanging
 
+---
+
 ## Setting up docker containers on target machines
 - Follow steps at https://docs.docker.com/engine/install/debian/ to install docker on all machines
 - specifically for the jenkins node vms (that run the jenkins container), the current user must be in docker group
