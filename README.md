@@ -163,3 +163,18 @@
 - so we can basically have a jenkinsfile that will build an image with tag as `snapshot` and then have a separate ansible variable for the staging servers that always use the snapshot tag instead of a specific numeric tag
 
 ---
+
+## Ansible Galaxy
+
+- Ansible galaxy is a large public repository of ansible content
+- In our playbook, we have used `docker_container` and `docker_prune` modules
+- These modules are part of the `community docker` ansible collection
+- Ansible collections are a collection of playbooks, plugins, modules and roles
+- `docker_container` module allows us to control containers
+  - here we just set it to start in detached mode with a port mapping of our choice
+- `docker_prune` module allows us to control pruning of any docker element
+  - here we use it to prune old images so as to be space-efficient
+  - by default, it will only remove dangling images which refers to an image with same name and tag as an existing one but not being used
+  - we have to specifically set `images_filter.dangling: false` to remove all unused images including non-dangling ones
+
+---
