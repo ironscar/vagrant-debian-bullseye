@@ -1,2 +1,2 @@
 spring_boot_docker:
-  tag: 35
+  tag: snapshot
