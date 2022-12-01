@@ -13,3 +13,5 @@
     - name: Remove unused images
       docker_prune:
         images: true
+        images_filters:
+          dangling: false
