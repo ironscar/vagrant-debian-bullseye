@@ -183,9 +183,14 @@
 
 - We create a new directory for each environment and place an inventory file in each with its own group_vars
 - The group_vars are picked up from the inventory file directory by default
+- The file inside group_vars should mimic the name of some group in the inventory or else it won't be considered
 - We create a separate directory called playbooks which houses just the playbooks
 - These playbooks are supposed to be independent of environment so that we can choose inventory file dynamically
 - Created `app_stage` and `app_prod` groups with a different VM in each
 - When we refer to hosts `all` in playbooks, it means all VMs in the inventory
+- This allows handling separate environments
+  - here we test by building main and snapshot and updating the inventory file to be used in each case
+  - snapshot runs stage inventory which will use the snapshot image
+  - main runs prod inventory which will use the hardcoded image
 
 ---
