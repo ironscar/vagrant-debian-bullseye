@@ -178,3 +178,14 @@
   - we have to specifically set `images_filter.dangling: false` to remove all unused images including non-dangling ones
 
 ---
+
+## Directory Structure
+
+- We create a new directory for each environment and place an inventory file in each with its own group_vars
+- The group_vars are picked up from the inventory file directory by default
+- We create a separate directory called playbooks which houses just the playbooks
+- These playbooks are supposed to be independent of environment so that we can choose inventory file dynamically
+- Created `app_stage` and `app_prod` groups with a different VM in each
+- When we refer to hosts `all` in playbooks, it means all VMs in the inventory
+
+---
