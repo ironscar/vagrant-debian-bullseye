@@ -5,7 +5,7 @@
     - name: Update latest image
       docker_image:
         name: ironscar/spring-boot-docker
-        tag: "{{spring_boot_docker.tag}}"
+        tag: snapshot
         pull: yes
     - name: Start new spring-boot container
       docker_container:
