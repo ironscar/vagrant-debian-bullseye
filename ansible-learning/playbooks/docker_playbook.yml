@@ -2,11 +2,12 @@
   hosts: all
   remote_user: root
   tasks:
-    - name: Update latest image
+    - name: Update latest snapshot image
       docker_image:
         name: ironscar/spring-boot-docker
         tag: snapshot
         pull: true
+      when spring_boot_docker.override_image == true
     - name: Start new spring-boot container
       docker_container:
         name: spring-boot-docker
