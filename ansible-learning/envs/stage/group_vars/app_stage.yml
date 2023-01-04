@@ -1,2 +1,4 @@
 spring_boot_docker:
   tag: snapshot
+  app_sbd_prop1: custom
+  app_sbd_prop2: stage

@@ -6,6 +6,9 @@
       docker_container:
         name: spring-boot-docker
         image: ironscar/spring-boot-docker:{{spring_boot_docker.tag}}
+        env:
+          app_sbd_prop1: {{spring_boot_docker.app_sbd_prop1}}
+          app_sbd_prop2: {{spring_boot_docker.app_sbd_prop2}}
         state: started
         detach: true
         cleanup: true
