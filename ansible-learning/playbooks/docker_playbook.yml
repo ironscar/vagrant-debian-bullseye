@@ -2,6 +2,12 @@
   hosts: all
   remote_user: root
   tasks:
+    - name: Update snapshot image
+      docker_image:
+        name: ironscar/spring-boot-docker:snapshot
+        source: pull
+        force_source: yes
+      when: spring_boot_docker.override_image == true
     - name: Start new spring-boot container
       docker_container:
         name: spring-boot-docker
@@ -12,8 +18,6 @@
         state: started
         detach: true
         cleanup: true
-        pull: "{{spring_boot_docker.override_image | default(false) | bool}}"
-        restart_policy: always
         ports: 8080:8081
     - name: Remove unused images
       docker_prune:
