@@ -2,11 +2,6 @@
   hosts: all
   remote_user: root
   tasks:
-    - name: Remove unused images
-      docker_prune:
-        images: true
-        images_filters:
-          dangling: false
     - name: Start new spring-boot container
       docker_container:
         name: spring-boot-docker
@@ -17,4 +12,10 @@
         state: started
         detach: true
         cleanup: true
+        pull: true
         ports: 8080:8081
+    - name: Remove unused images
+      docker_prune:
+        images: true
+        images_filters:
+          dangling: false
