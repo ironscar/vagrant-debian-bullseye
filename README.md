@@ -203,5 +203,6 @@
   - thus, we add the pull flag to docker_Container in the playbook so that the image is refreshed everytime
   - but maybe we don't want to do that for prod and only for stage as snapshot only exists on stage
   - maybe we can have that as a group_var [TODO]
+    - https://stackoverflow.com/questions/55429231/my-playbook-is-not-downloading-the-updated-images-with-same-tag-name
 
 ---
