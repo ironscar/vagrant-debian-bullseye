@@ -7,6 +7,7 @@
         name: ironscar/spring-boot-docker
         tag: snapshot
         pull: true
+        source: pull
       when: spring_boot_docker.override_image == true
     - name: Start new spring-boot container
       docker_container:
