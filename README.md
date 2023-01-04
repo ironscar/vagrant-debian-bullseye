@@ -200,9 +200,9 @@
 - add external props as environment props to docker_container using `env` of docker_container module of Ansible
 - pass the environment props values from the app_stage and app_prod yml files on a per environment basis
 - if an image tag like `snapshot` is being overwritten, the new docker image update for the same tag are never pulled
-  - thus, we add the pull flag to docker_Container in the playbook so that the image is refreshed everytime
-  - but maybe we don't want to do that for prod and only for stage as snapshot only exists on stage
-  - maybe we can have that as a group_var [TODO]
-    - https://stackoverflow.com/questions/55429231/my-playbook-is-not-downloading-the-updated-images-with-same-tag-name
+  - thus, we add the `pull` flag to docker_container in the playbook so that the image is refreshed everytime
+  - but we don't want to do that for prod and only for stage as snapshot only exists on stage
+  - therefore have a group_var and then use pull flag with that variable
+  - container will get updates if the image is refreshed
 
 ---
