@@ -6,7 +6,7 @@
       docker_image:
         name: ironscar/spring-boot-docker
         tag: snapshot
-        pull: yes
+        pull: true
     - name: Start new spring-boot container
       docker_container:
         name: spring-boot-docker
