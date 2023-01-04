@@ -194,3 +194,10 @@
   - main runs prod inventory which will use the hardcoded image
 
 ---
+
+## Externalizing properties
+
+- add external props as environment props to docker_container using `env` of docker_container module of Ansible
+- pass the environment props values from the app_stage and app_prod yml files on a per environment basis
+
+---
