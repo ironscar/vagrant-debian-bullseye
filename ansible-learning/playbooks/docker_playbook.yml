@@ -4,9 +4,7 @@
   tasks:
     - name: Update latest snapshot image
       docker_image:
-        name: ironscar/spring-boot-docker
-        tag: snapshot
-        pull: true
+        name: ironscar/spring-boot-docker:snapshot
         source: pull
       when: spring_boot_docker.override_image == true
     - name: Start new spring-boot container
