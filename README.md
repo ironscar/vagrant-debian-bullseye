@@ -206,3 +206,22 @@
   - container will get updates if the image is refreshed
 
 ---
+
+## Externalizing passwords
+
+- Need ansible vault for it so in jenkins container, we need `pip3 install ansible-vault`
+- We create a directory structure like `group_vars/{ansible_group}/` with `vars.yml` and `vault.yml` in it
+  - `ansible_group` here implies `app_stage`, `app_prod` etc
+- we define a key value pair in the vault.yml and encrypt it using `ansible-vault encrypt --vault-id {vaultId}@{password_file} vault.yml`
+  - here for the time being my vaultId was `trial` and password_file was `vault_password_file` saved in `~/ansible-learning`
+  - we can keep something like `stage_vault` and `prod_vault` for our two environments
+  - we can see the current vaultIds on the first line of the encrypted file at the end
+  - reading vault.yml thereafter shows encrypted content, which you can then track in git
+- adding a new key to vault yml would require the following:
+  - `ansible-vault edit --vault-id {vaultId}@{password_file} vault.yml` which opens a temp version of file decrypted
+  - we can add the new key value pair for the password here and save it, and that encrypts the file with the updates
+  - we can use `ansible-vault view --vault-id {vaultId}@{password_file} vault.yml` to view the details in terminal
+  - but obviously try not to view it as part of automated processes as it is a security risk
+- once this is done, we store the vault passwords in jenkins credentials and use them in the jenkinsfile to decrypt the vaults
+
+---

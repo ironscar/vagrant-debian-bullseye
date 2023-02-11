@@ -3,3 +3,4 @@ spring_boot_docker:
   app_sbd_prop1: custom
   app_sbd_prop2: prod
   override_image: false
+  app_sbd_pass: "{{vault_app_sbd_pass}}"

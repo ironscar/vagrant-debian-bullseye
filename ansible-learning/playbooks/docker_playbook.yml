@@ -9,6 +9,7 @@
         env:
           app_sbd_prop1: "{{spring_boot_docker.app_sbd_prop1}}"
           app_sbd_prop2: "{{spring_boot_docker.app_sbd_prop2}}"
+          app_sbd_pass: "{{spring_boot_docker.app_sbd_pass}}"
         state: started
         detach: true
         cleanup: true
