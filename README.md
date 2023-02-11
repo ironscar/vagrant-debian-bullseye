@@ -213,8 +213,7 @@
 - We create a directory structure like `group_vars/{ansible_group}/` with `vars.yml` and `vault.yml` in it
   - `ansible_group` here implies `app_stage`, `app_prod` etc
 - we define a key value pair in the vault.yml and encrypt it using `ansible-vault encrypt --vault-id {vaultId}@{password_file} vault.yml`
-  - here for the time being my vaultId was `trial` and password_file was `vault_password_file` saved in `~/ansible-learning`
-  - we can keep something like `stage_vault` and `prod_vault` for our two environments
+  - we can keep something like `stage_vault` and `prod_vault` as vault-ids for our two environments
   - we can see the current vaultIds on the first line of the encrypted file at the end
   - reading vault.yml thereafter shows encrypted content, which you can then track in git
 - adding a new key to vault yml would require the following:
