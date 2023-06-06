@@ -81,6 +81,9 @@
 - Copy the public key and manually paste them in `~/.ssh/authorized_keys` file of app1 and app2 while being `vagrant` user and `root` user separately
 - You can change between users with `sudo su - <username>` and while in root, may have to create the .ssh directory and authorized_keys file in it
 - After that, doing `sudo ssh -i ansible_id_rsa <username>@<ip of server>` from `~/.ssh` will allow connecting to those machines via ssh after verifying ssh passphrase if set
+- Sometimes the host key of the target nodes change giving errors
+  - in those cases, we need to go to `.ssh/known_hosts` of our ansible host and empty the file
+  - thereafter, use SSH manually to all the target nodes to add the host key to known_hosts again
 
 ## Troubleshooting SSH
 - Generate keys in `~/.ssh/`
@@ -90,7 +93,7 @@
   - PermitRootLogin yes
   - PasswordAuthentication no
 - After updating these, make sure to restart ssh service with `sudo systemctl restart ssh.service`
-- Every user has its own home directory with `~/.ssh.authorized_keys` so SSH is also specific to that user
+- Every user has its own home directory with `~/.ssh/authorized_keys` so SSH is also specific to that user
 
 ## Ansible config & inventory
 - The config file by default exists in /etc/ansible as ansible.cfg
