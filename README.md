@@ -224,11 +224,12 @@
   - we can add the new key value pair for the password here and save it, and that encrypts the file with the updates
   - we can use `ansible-vault view --vault-id {vaultId}@{password_file} vault.yml` to view the details in terminal
   - but obviously try not to view it as part of automated processes as it is a security risk
-- once this is done, we store the vault passwords in jenkins credentials and use them in the jenkinsfile to decrypt the vaults
-- to update passwords and kick off deployment
+- Once this is done, we store the vault passwords in jenkins credentials and use them in the jenkinsfile to decrypt the vaults
+- To update passwords and kick off deployment
   - load your encrypted file and use `ansible-vault edit` to edit it
   - then open your file normally with vi to get the encrypted content and push it back into git
   - make sure to remove the password file if you created one for this
   - kick off a build for the dependent applications from jenkins which will redeploy with the changes
+- The current vault password is stored in `~/ansible-learning/vault_password_file` on the VM directly for now
 
 ---
