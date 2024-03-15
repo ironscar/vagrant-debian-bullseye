@@ -233,3 +233,14 @@
 - The current vault password is stored in `~/ansible-learning/vault_password_file` on the VM directly for now
 
 ---
+
+# Multiple apps setup
+
+- If there are multiple apps to be deployed and we wanted to do it with one playbook [TRY]
+  - Pass a variable from jenkins shell as `extra-vars` specifying the app
+  - Use this variable with task conditions to choose which task to execute
+  - Have one task for each app
+  - Finally, keep a generic cleanup task
+  - Do this once we have an image for `spring-six-pro` or some other project too
+
+---
