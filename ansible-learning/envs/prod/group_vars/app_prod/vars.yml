@@ -4,3 +4,9 @@ spring_boot_docker:
   app_sbd_prop2: prod
   override_image: false
   app_sbd_pass: "{{vault_app_sbd_pass}}"
+spring_six_pro:
+  tag: 1
+  app_sql_db_url: jdbc:mysql://localhost:3306/student_tracker
+  app_sql_db_user: springstudent
+  override_image: false
+  app_sql_db_pass: "{{vault_app_ssp_sql_pass}}"

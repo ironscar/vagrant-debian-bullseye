@@ -15,6 +15,19 @@
         cleanup: true
         pull: "{{spring_boot_docker.override_image}}"
         ports: 8080:8081
+    - name: Start spring-six-pro container
+      docker_container:
+        name: spring-six-pro
+        image: ironscar/spring-six-pro:{{spring_six_pro.tag}}
+        env:
+          app_sql_db_url: "{{spring_six_pro.app_sql_db_url}}"
+          app_sql_db_user: "{{spring_six_pro.app_sql_db_user}}"
+          app_sql_db_pass: "{{spring_six_pro.app_sql_db_pass}}"
+        state: started
+        detach: true
+        cleanup: true
+        pull: "{{spring_boot_docker.override_image}}"
+        ports: 8081:8081
     - name: Remove unused images
       docker_prune:
         images: true
