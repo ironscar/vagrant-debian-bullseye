@@ -26,7 +26,7 @@
         state: started
         detach: true
         cleanup: true
-        pull: "{{spring_boot_docker.override_image}}"
+        pull: "{{spring_six_pro.override_image}}"
         ports: 8081:8081
     - name: Remove unused images
       docker_prune:
