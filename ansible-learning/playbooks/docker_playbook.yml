@@ -15,6 +15,7 @@
         cleanup: true
         pull: "{{spring_boot_docker.override_image}}"
         ports: 8080:8081
+      tags: spring-boot-docker
     - name: Start spring-six-pro container
       docker_container:
         name: spring-six-pro
@@ -28,8 +29,10 @@
         cleanup: true
         pull: "{{spring_six_pro.override_image}}"
         ports: 8081:8081
+      tags: spring-six-pro
     - name: Remove unused images
       docker_prune:
         images: true
         images_filters:
           dangling: false
+      tags: common
