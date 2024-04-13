@@ -236,11 +236,10 @@
 
 # Multiple apps setup
 
-- If there are multiple apps to be deployed and we wanted to do it with one playbook [TRY]
-  - Pass a variable from jenkins shell as `extra-vars` specifying the app
-  - Use this variable with task conditions to choose which task to execute
-  - Have one task for each app
-  - Finally, keep a generic cleanup task
-  - Do this once we have an image for `spring-six-pro` or some other project too
+- If there are multiple apps to be deployed and we wanted to do it with one playbook
+  - Each app will have its own Jenkinsfile which will internally run the common Ansible playbook
+  - Have one task for each app and add a tag to each task corresponding to that app
+  - Finally, keep a generic cleanup task with a tag of common
+  - In the Jenkinsfile, when invoking the playbook command, specify the tag for the app and the common tag to only execute those two
 
 ---
