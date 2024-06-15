@@ -1,5 +1,5 @@
 spring_boot_docker:
-  tag: 78
+  tag: 79
   app_sbd_prop1: custom
   app_sbd_prop2: prod
   override_image: false
